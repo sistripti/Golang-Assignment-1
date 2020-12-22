@@ -1,0 +1,43 @@
+package main
+
+import (
+	"fmt"
+	"time"
+)
+
+func main() {
+
+	ping := make(chan int, 20)
+	pong := make(chan int, 20)
+
+	go pinger(ping, pong)
+	go ponger(pong, ping)
+
+	ping <- 1
+
+	select {}
+}
+
+var counter int = 0
+
+func pinger(ping <-chan int, pong chan<- int) {
+	for {
+		<-ping
+		fmt.Println("Ping", counter)
+		time.Sleep(1 * time.Second)
+		pong <- 1
+
+	}
+
+}
+
+func ponger(pong <-chan int, ping chan<- int) {
+	for {
+		<-pong
+		counter++
+		fmt.Println("Pong", counter)
+		time.Sleep(1 * time.Second)
+		ping <- 1
+
+	}
+}

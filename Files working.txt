@@ -1,0 +1,37 @@
+package main
+import "os"
+func main(){
+        file,err:=os.Create("myfile") 
+        if err!=nil {
+                panic(err)
+        }
+        data:=[]byte("Hello world\n")
+        file.Write(data) //Data as a byte array
+        file.WriteString("This is a String\n") 
+        file.Close()
+}
+
+
+
+package main
+import ( "fmt"
+        "os"
+)
+func main(){
+        file,err:=os.Open("myfile")
+        if err!=nil {
+                panic(err)
+        }
+        data:=make([]byte,5) 
+        file.Seek(6,0) 
+        
+
+        file.Read(data) 
+        fmt.Printf("The file data is %s\n",string(data))
+        fmt.Println(string(data))
+        file.Seek(0,0)
+        newdata:=make([]byte,5)
+        file.Read(newdata)
+        fmt.Println(string(newdata))
+        file.Close()
+}

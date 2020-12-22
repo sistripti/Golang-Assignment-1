@@ -1,0 +1,27 @@
+package main
+
+import (
+	"fmt"
+)
+
+type user struct {
+	userName       string
+	userAge        int
+	userSalary     float64
+	userOccupation string
+}
+
+func main() {
+	var u user
+
+	u.userName = "Shwet"
+	u.userAge = 25
+	u.userSalary = 800.56
+	u.userOccupation = "Doctor"
+
+	fmt.Println("Name of the user is", u.userName)
+	fmt.Println("Age of the user is", u.userAge)
+	fmt.Println("Occupation of the user is", u.userOccupation)
+	fmt.Println("Income of the user is", u.userSalary)
+
+}
